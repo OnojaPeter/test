@@ -48,7 +48,7 @@ function populatePatientList(patients) {
                     </div>
                 </div>
                 <div>
-                    <img src="public/images/more_horiz_FILL0_wght300_GRAD0_opsz24.svg" alt="3 dots">
+                    <img src="./public/images/more_horiz_FILL0_wght300_GRAD0_opsz24.svg" alt="3 dots">
                 </div>
             </div>
         `;
