@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/output.css">
+
+    <title>Patient Dashboard</title>
+    <!-- <style>
+       
+    </style> -->
+</head>
+<body class="bg-gray-100 flex flex-col gap-y-8 md:justify-center items-center w-full ">
+    <div class="max-w-[1600px] w-full">
+
+        <header class="mt-4 mx-4 ">
+            <nav class="hidden md:flex justify-between px-6 py-3 items-center rounded-full bg-white">
+                <div>
+                    <img src="/public/images/TestLogo.svg" alt="logo">
+                </div>
+
+                <div id="nav-items" class="hidden md:flex md:gap-4 xl:gap-6 2xl:gap-10">
+                    <div class="flex gap-[9px] py-2">
+                        <div class="hidden lg:flex items-center">
+                            <img src="/public/images/home_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+                        </div>
+                        <a href="">Overview</a>
+                    </div>
+
+                    <div class="flex gap-[9px] bg-[#01F0D0] py-2 px-3 rounded-full">
+                        <div class="hidden lg:flex items-center">
+                            <img src="/public/images/group_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+                        </div>
+                        <a href="">Patients</a>
+                    </div>
+
+                    <div class="flex gap-[9px] py-2">
+                        <div class="hidden lg:flex items-center">
+                            <img src="/public/images/calendar_today_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+                        </div>
+                        <a href="">Schedule</a>
+                    </div>
+
+                    <div class="flex gap-[9px] py-2">
+                        <div class="hidden lg:flex items-center">
+                            <img src="/public/images/chat_bubble_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+                        </div>
+                        <a href="">Message</a>
+                    </div>
+
+                    <div class="flex gap-[9px] py-2">
+                        <div class="hidden lg:flex items-center">
+                            <img src="/public/images/credit_card_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+                        </div>
+                        <a href="">Transactions</a>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex md:gap-x-1 lg:gap-x-2 xl:gap-x-4">
+                    <div class=" gap-2 hidden xl:flex">
+                        <div class="flex items-center">
+                            <img src="/public/images/senior-woman-doctor-and-portrait-smile-for-health-2023-11-27-05-18-16-utc.png" alt="">
+                        </div>
+                        
+                        <div class="text-sm">
+                            <p class="font-bold">Dr. Jose Simmons</p>
+                            <p>General Practitioner</p>
+                        </div>
+                    </div>
+
+                    <div class="w-[2px] bg-gray-100"></div>
+
+                    <div class="flex items-center md:gap-x-1 lg:gap-x-2 xl:gap-x-4">
+                        <div>
+                            <img src="/public/images/settings_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+                        </div>
+                        
+                        <div>
+                            <img src="/public/images/more_vert_FILL0_wght300_GRAD0_opsz24.svg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+             <!-- Hamburger Menu Icon for Mobile -->
+            <div class="md:hidden flex justify-between px-4 py-2 rounded-full bg-white">
+                <div>
+                    <img class="w-[80%] md:w-full" src="/public/images/TestLogo.svg" alt="logo">
+                </div>
+                <button id="menu-button" class="focus:outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="hamburger-icon" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" id="cancel-icon" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>                                            
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="hidden md:hidden bg-white flex flex-col items-center mt-4 rounded-[16px]">
+                <div class="flex flex-col gap-4 my-4 p-4 ">
+                    <a href="" class="flex items-center gap-[9px]">
+                        <img src="/public/images/home_FILL0_wght300_GRAD0_opsz24.svg" alt="home icon" class="lg:hidden">
+                        Overview
+                    </a>
+                    <div id="mobile-patient-dropdown" class="flex flex-col">
+                        <button id="mobile-patient-button" class="flex items-center gap-[9px]">
+                            <img src="/public/images/group_FILL0_wght300_GRAD0_opsz24.svg" alt="group icon" class="lg:hidden">
+                            Patients
+                            <svg id="arrow-icon" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div class="overflow-y-auto custom-scrollbar">
+                            <ul id="mobile-patient-list" class="hidden flex flex-col gap-8 mt-2 p-4 shadow-md h-[300px] ">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <a href="" class="flex items-center gap-[9px]">
+                        <img src="/public/images/calendar_today_FILL0_wght300_GRAD0_opsz24.svg" alt="calendar icon" class="lg:hidden">
+                        Schedule
+                    </a>
+                    <a href="" class="flex items-center gap-[9px]">
+                        <img src="/public/images/chat_bubble_FILL0_wght300_GRAD0_opsz24.svg" alt="chat icon" class="lg:hidden">
+                        Message
+                    </a>
+                    <a href="" class="flex items-center gap-[9px]">
+                        <img src="/public/images/credit_card_FILL0_wght300_GRAD0_opsz24.svg" alt="credit card icon" class="lg:hidden">
+                        Transactions
+                    </a>
+                </div>
+        </header>
+
+        <main class=" p-4">
+            <section>
+                <div class="flex gap-6">
+                    <!-- Sidebar -->
+                    <div class="hidden md:block w-1/4 bg-white rounded-[16px] shadow-md py-4 h-full">
+                        <div class="flex justify-between items-center h-8 mb-2 px-4">
+                            <h2 class="text-2xl font-bold">Patients</h2>
+                            <div>
+                                <img src="/public/images/search_FILL0_wght300_GRAD0_opsz24.svg" alt="search icon">
+                            </div>                           
+                        </div>
+                        
+                        <div class="h-screen overflow-y-auto custom-scrollbar">
+                            <ul id="patient-list" class="space-y-3 py-3">
+                                <!-- Patient List Items will be inserted here from js dynamically -->
+                            </ul>
+                        </div>                        
+                    </div>
+            
+                    <!-- Main Content -->
+                    <div class="w-full md:w-3/4 flex flex-col gap-6">
+                        <div class="flex flex-col-reverse lg:flex-row  gap-6">
+                            <!-- Left Column -->
+                            <div class="lg:w-2/3 flex flex-col gap-y-6">
+                                <div class="bg-white p-6 rounded-[16px] shadow-md">
+                                    <div class="mb-8">
+                                        <h1 class="text-3xl font-bold">Diagnosis History</h1>
+                                    </div>
+                
+                                    <div class="bg-[#F4F0FE] rounded-[16px] p-3 w-full flex flex-col lg:flex-row gap-6 ">
+                                        <div class="w-full lg:w-[65%]">
+                                            <div class="flex justify-between items-center">
+                                                <h2 class="text-xl font-bold">Blood Pressure</h2>
+                                                <select id="data-range" class="bg-[#F4F0FE] p-2">
+                                                    <option value="6-months">Last 6 Months</option>
+                                                    <option value="1-year">Previous 1 Year</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="chart-container">
+                                                <canvas id="chart"></canvas>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="w-full lg:w-[35%] flex flex-col gap-y-2 ">
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex gap-1 items-center">
+                                                    <div class="h-3 w-3 bg-[#E66FD2] rounded-[20px]"></div>
+                                                    <p class="text-sm font-bold">Systolic</p>
+                                                </div>
+                                                
+                                                <p class="text-xl font-bold" id="systolic-value">160</p>
+                                                <div class="flex gap-2">
+                                                    <div class="flex items-center">
+                                                        <img src="/public/images/ArrowUp.svg" alt="">
+                                                    </div>
+                                                    
+                                                    <p id="systolic-level">Higher than Average</p>
+                                                </div>
+                                            </div>
+                
+                                            <div class="bg-gray-200 h-[2px] w-full"></div>
+                
+                                            <div class="flex flex-col gap-y-2">
+                                                <div class="flex gap-1 items-center">
+                                                    <div class="h-3 w-3 bg-[#8C6FE6] rounded-[20px]"></div>
+                                                    <p class="text-sm font-bold">Diastolic</p>
+                                                </div>
+                                                
+                                                <p class="text-xl font-bold"  id="diastolic-value">78</p>
+                                                <div class="flex gap-2">
+                                                    <div class="flex items-center">
+                                                        <img src="/public/images/ArrowDown.svg" alt="">
+                                                    </div>
+                                                    <p id="diastolic-level">Lower than Average</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                
+                                    <div class="flex flex-col md:flex-row gap-3 md:gap-5 mt-6 text-sm">
+                                        <div class="bg-[#E0F3FA] p-4 rounded-[16px] w-full md:w-1/3 flex flex-col gap-y-2 md:gap-y-4">
+                                            <div>
+                                                <img src="/public/images/respiratory rate.svg" alt="">
+                                            </div>
+                                            <div class="font-bold">
+                                                <p>Respiratory Rate</p>
+                                                <h3 class="text-2xl " id="respiratory-rate">20 bpm</h3>
+                                            </div>
+                                            
+                                            <p id="respiratory-levels">Normal</p>
+                                            
+                                        </div>
+
+                                        <div class="bg-[#FFE6E9] p-4 rounded-[16px] w-full md:w-1/3 flex flex-col gap-y-2 md:gap-y-4">
+                                            <div>
+                                                <img src="/public/images/temperature.svg" alt="">
+                                            </div>
+                                            <div class="font-bold">
+                                                <p>Temperature</p>
+                                                <h3 class="text-2xl" id="temperature">98.6°F</h3>
+                                            </div>
+                                            
+                                            <p id="temperature-levels">Normal</p>
+                                            
+                                        </div>
+
+                                        <div class="bg-[#FFE6F1] p-4 rounded-[16px] w-full md:w-1/3 flex flex-col gap-y-2 md:gap-y-4">
+                                            <div>
+                                                <img src="/public/images/HeartBPM.svg" alt="">
+                                            </div>
+                                            <div class="font-bold">
+                                                <p>Heart Rate</p>
+                                                <h3 class="text-2xl " id="heart-rate">78 bpm</h3>
+                                            </div>
+                                            
+                                            <div class="flex gap-2">
+                                                <div class="flex items-center">
+                                                    <img src="/public/images/ArrowDown.svg" alt="">
+                                                </div>
+                                                
+                                                <p id="heart-rate-levels">Lower than Average</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-white py-6 rounded-[16px] shadow-md text-left">
+                                    <h2 class="text-xl font-bold px-6 mb-6">Diagnostic List</h2>
+                                    <div class="overflow-x-auto px-2">
+                                        <table class="w-full bg-white">
+                                            <thead class="bg-gray-100">
+                                                <tr>
+                                                    <th class="py-2 px-2 md:px-4 text-left rounded-l-[16px]">Problem</th>
+                                                    <th class="py-2 px-2 md:px-4 text-left">Description</th>
+                                                    <th class="py-2 px-2 md:px-4 text-left rounded-r-[16px]">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="problem-list" class="text-sm">
+                                                <!-- Problem List Items will be inserted here from js dynamically -->                                               
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <!-- Right Column -->
+                            <div class="lg:w-1/3  text-center flex flex-col gap-y-6">
+                                <div class="bg-white p-4 rounded-[16px] shadow-md">
+                                    <div class="mb-4">
+                                        <img id="profile-picture" src="" alt="Profile" class="w-32 h-32 rounded-full mx-auto">
+                                    </div>
+                                    
+                                    <h2 class="text-xl font-bold" id="patient-name">Jessica Taylor</h2>
+                
+                                    <div class="flex flex-col gap-y-4 text-left mt-6">
+                                        <div class="flex gap-2">
+                                            <img src="/public/images/BirthIcon.svg" alt="">
+                                            <div class="flex flex-col capitalize text-sm">
+                                                <p>date of birth</p>
+                                                <p id="patient-dob" class="font-medium text-start"></p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <img src="/public/images/FemaleIcon.svg" alt="">
+                                            <div class="flex flex-col capitalize text-sm">
+                                                <p>gender</p>
+                                                <p id="patient-gender" class="font-medium text-start"></p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <img src="/public/images/PhoneIcon.svg" alt="">
+                                            <div class="flex flex-col capitalize text-sm">
+                                                <p>contact info.</p>
+                                                <p id="patient-contact" class="font-medium text-start"></p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <img src="/public/images/PhoneIcon.svg" alt="">
+                                            <div class="flex flex-col capitalize text-sm">
+                                                <p>emergency contacts</p>
+                                                <p id="patient-emergency" class="font-medium text-start"></p>
+                                            </div>
+                                        </div>
+                                        <div class="flex gap-2">
+                                            <img src="/public/images/InsuranceIcon.svg" alt="">
+                                            <div class="flex flex-col capitalize text-sm">
+                                                <p>insurance provider</p>
+                                                <p id="patient-insurance" class="font-medium text-start"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="mt-6">
+                                        <button class="bg-[#01F0D0] px-4 py-2 rounded-[20px]">Show All Information</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-white p-4 rounded-[16px] shadow-md">
+                                    <h1 class="text-xl font-bold text-start">Lab results</h1>
+                                    <div class="flex flex-col px-2 gap-y-4 mt-4">
+                                    <div class="flex justify-between"> <p>Blood Tests</p> <a href=""><img src="/public/images/download_FILL0_wght300_GRAD0_opsz24 (1).svg"></a></div>
+                                    <div class="flex justify-between"> <p>CT Scans</p> <a href=""><img src="/public/images/download_FILL0_wght300_GRAD0_opsz24 (1).svg"></a></div>
+                                    <div class="flex justify-between"> <p>Radiology Reports</p> <a href=""><img src="/public/images/download_FILL0_wght300_GRAD0_opsz24 (1).svg"></a></div>
+                                    <div class="flex justify-between"> <p>X-Rays</p> <a href=""><img src="/public/images/download_FILL0_wght300_GRAD0_opsz24 (1).svg"></a></div>
+                                    <div class="flex justify-between"> <p>Urine Test</p> <a href=""><img src="/public/images/download_FILL0_wght300_GRAD0_opsz24 (1).svg"></a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>       
+        </main> 
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const cancelButton = document.getElementById('cancel-icon');
+            const hamburger = document.getElementById('hamburger-icon');
+
+            const mobilePatientsButton = document.getElementById('mobile-patient-button');
+            const mobilePatientsList = document.getElementById('mobile-patient-list');
+            const arrowIcon = document.getElementById('arrow-icon');
+
+            menuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                cancelButton.classList.toggle('hidden');
+                hamburger.classList.toggle('hidden');
+            });
+
+            mobilePatientsButton.addEventListener('click', function () {
+                mobilePatientsList.classList.toggle('hidden');
+                arrowIcon.classList.toggle('transform');
+                arrowIcon.classList.toggle('rotate-180');
+            });
+        });
+
+    </script>
+</body>
+</html>
+
+
+
+
+

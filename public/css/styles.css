@@ -1,0 +1,46 @@
+h1,h2,h3,p,span,a,button {
+    font-family: "Manrope", sans-serif;
+}
+
+/* scrollbar custom*/
+.custom-scrollbar::-webkit-scrollbar {
+    width: 12px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #000;
+    border-radius: 10px;
+    border: 3px solid #f1f1f1;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Chart container styling */
+.chart-container {
+    position: relative;
+}
+
+canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/*sidenav clicked color*/
+.clicked-bg{
+    background-color: #D8FCF7;
+}
+
+/*table styling*/
+th, td {
+    word-break: break-word;
+}
+@media (max-width: 640px) {
+    th, td {
+        padding: 0.5rem 0.25rem;
+    }
+}
